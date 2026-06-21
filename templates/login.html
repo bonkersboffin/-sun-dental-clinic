@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - DentalCare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <img class="auth-logo" src="/static/img/dental-logo.png" alt="DentalCare logo"/>
+    <h1>DentalCare</h1>
+    <p>Sign in to access patient records</p>
+    {% if error %}
+      <div class="form-msg error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+      <div class="form-msg success">{{ success }}</div>
+    {% endif %}
+    {% if info %}
+      <div class="form-msg info">{{ info }}</div>
+    {% endif %}
+    <form method="post" action="/login">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" required autofocus />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" required />
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">Sign In</button>
+      </div>
+    </form>
+    <p class="form-meta" style="margin-top:12px;color:var(--text-light);font-size:0.9rem;">Don't have an account? <a href="{{ url_for('register') }}">Create one</a>.</p>
+  </main>
+</body>
+</html>

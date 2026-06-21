@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="logo-title logo-desc">
+  <title id="logo-title">DentalCare logo</title>
+  <desc id="logo-desc">A clean teal and blue dental mark.</desc>
+  <defs>
+    <linearGradient id="logo-surface" x1="10" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAFFFE"/>
+      <stop offset="1" stop-color="#E8F8F5"/>
+    </linearGradient>
+    <linearGradient id="logo-tooth" x1="18" y1="15" x2="47" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E86C1"/>
+      <stop offset=".55" stop-color="#17A589"/>
+      <stop offset="1" stop-color="#48C9B0"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#logo-surface)"/>
+  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="15.25" fill="none" stroke="#C8EAE4" stroke-width="1.5"/>
+  <path fill="url(#logo-tooth)" d="M31.99 14.25c-2.61 0-4.67 1.03-6.49 1.93-1.48.74-2.82 1.41-4.25 1.41-1.03 0-2.08-.23-3.1-.46-2.55-.56-5.19-1.14-7.33 1.24-3.45 3.83-2.11 12.78 1.37 19.11.78 1.41 1.45 3.48 2.17 5.68 1.51 4.61 3.23 9.84 6.97 9.84 3.24 0 4.16-4.72 5.05-9.28.94-4.83 1.9-8.7 5.61-8.7 3.7 0 4.66 3.87 5.6 8.7.89 4.56 1.81 9.28 5.06 9.28 3.73 0 5.45-5.23 6.96-9.84.72-2.2 1.39-4.27 2.17-5.68 3.48-6.33 4.82-15.28 1.37-19.11-2.14-2.38-4.78-1.8-7.33-1.24-1.02.23-2.07.46-3.1.46-1.43 0-2.77-.67-4.25-1.41-1.81-.9-3.88-1.93-6.48-1.93Z"/>
+  <path fill="#FAFFFE" fill-opacity=".88" d="M23.07 24.18c.99-2.77 3.6-4.62 6.5-4.62 1.25 0 2.01.29 2.91.65.53.2 1.14.44 1.97.64-2.02.57-3.4.44-4.82.31-1.74-.16-3.53-.32-6.56 3.02Z"/>
+  <path fill="#0D2B3E" fill-opacity=".13" d="M42.43 41.21c.37 1.44.67 2.99.97 4.49.31 1.62.64 3.25 1.08 4.51 1.06-1.83 2.02-4.76 2.79-7.11.79-2.4 1.53-4.68 2.55-6.54 3.28-5.96 3.98-12.97 1.38-15.86-.8-.88-1.77-1.01-3.14-.84.67.77 1.08 1.86 1.08 3.34 0 3.71-2.56 8.03-4.45 11.22-1.24 2.1-2.02 4.37-2.26 6.79Z"/>
+  <path fill="none" stroke="#FAFFFE" stroke-linecap="round" stroke-width="3" d="M20.65 44.78c3.05-2.42 6.79-3.72 11.35-3.72 4.57 0 8.31 1.3 11.36 3.72"/>
+  <circle cx="47.4" cy="17" r="4.1" fill="#48C9B0"/>
+</svg>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DentalCare - Patient Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="brand-logo" src="/static/img/dental-logo.png" alt="DentalCare logo"/>
+      <div>
+        <div class="brand-name">DentalCare</div>
+        <div class="brand-sub">Patient Records</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn active" data-panel="search" onclick="showPanel('search', this)">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Search Patient
+      </button>
+      <button class="nav-btn" data-panel="add" onclick="showPanel('add', this)">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v6M7 10h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        New Patient
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="today-label">Today</div>
+      <div class="today-date" id="todayDate"></div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- SEARCH PANEL -->
+    <section class="panel active" id="panel-search">
+      <div class="panel-header">
+        <h1>Find a Patient</h1>
+        <p>Type a name to instantly pull up records</p>
+      </div>
+
+      <div class="search-wrap">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none">
+            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Start typing patient name or phone..." autocomplete="off" oninput="onSearch()"/>
+        </div>
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <!-- Patient Record Card -->
+      <div class="patient-card hidden" id="patientCard">
+        <div class="card-header-row">
+          <div class="patient-avatar" id="patientAvatar"></div>
+          <div class="patient-meta">
+            <h2 id="cardName"></h2>
+            <div class="meta-chips">
+              <span class="chip chip-blue" id="cardAge"></span>
+              <span class="chip chip-teal" id="cardBlood"></span>
+              <span class="chip chip-green" id="cardPhone"></span>
+            </div>
+            <div class="meta-detail" id="cardAllergies"></div>
+          </div>
+          <div class="patient-actions">
+            <button class="btn-danger" onclick="removePatient()">Remove Patient</button>
+            <button class="btn-add-visit" onclick="openVisitModal()">+ Add Visit</button>
+          </div>
+        </div>
+
+        <!-- Visit Timeline -->
+        <div class="visits-section">
+          <h3 class="visits-title">Visit History</h3>
+          <div class="timeline" id="visitTimeline"></div>
+          <div class="no-visits hidden" id="noVisits">No visits recorded yet.</div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 8C27 8 16 19 16 32c0 7 2.5 14 6 20.5C25.5 59 30 72 40 72s14.5-13 18-19.5c3.5-6.5 6-13.5 6-20.5 0-13-11-24-24-24z" fill="currentColor" opacity=".12"/>
+          <path d="M40 8C27 8 16 19 16 32c0 7 2.5 14 6 20.5C25.5 59 30 72 40 72s14.5-13 18-19.5c3.5-6.5 6-13.5 6-20.5 0-13-11-24-24-24z" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M28 32c2-5 7-8 12-8s10 3 12 8" stroke="var(--blue-mid)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p>Search a patient name above to view their dental records</p>
+      </div>
+    </section>
+
+    <!-- ADD PATIENT PANEL -->
+    <section class="panel" id="panel-add">
+      <div class="panel-header">
+        <h1>Register New Patient</h1>
+        <p>Fill in the patient's details to create a record</p>
+      </div>
+
+      <div class="form-card">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="newName" placeholder="e.g. Priya Sharma"/>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="newAge" placeholder="e.g. 32" min="0" max="120"/>
+          </div>
+          <div class="form-group">
+            <label>Blood Group</label>
+            <select id="newBlood">
+              <option value="">Select...</option>
+              <option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option>
+              <option>O+</option><option>O-</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="newPhone" placeholder="+91 9876543210"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="newEmail" placeholder="patient@email.com"/>
+          </div>
+          <div class="form-group full">
+            <label>Known Allergies</label>
+            <input type="text" id="newAllergies" placeholder="e.g. Penicillin, Latex (or none)"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" onclick="addPatient()">Register Patient</button>
+        </div>
+        <div class="form-msg hidden" id="addMsg"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- VISIT MODAL -->
+  <div class="modal-overlay hidden" id="visitModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Record a Visit</h3>
+        <button class="modal-close" onclick="closeVisitModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Visit Date</label>
+          <input type="date" id="visitDate"/>
+        </div>
+        <div class="form-group">
+          <label>Problem / Complaint <span class="req">*</span></label>
+          <input type="text" id="visitProblem" placeholder="e.g. Cavity in lower molar"/>
+        </div>
+        <div class="form-group">
+          <label>Treatment Given</label>
+          <input type="text" id="visitTreatment" placeholder="e.g. Root canal, Scaling"/>
+        </div>
+        <div class="form-group">
+          <label>Doctor's Notes</label>
+          <textarea id="visitNotes" rows="3" placeholder="Any observations, prescriptions..."></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Next Appointment</label>
+            <input type="date" id="visitNext"/>
+          </div>
+          <div class="form-group">
+            <label>Cost (&#8377;)</label>
+            <input type="number" id="visitCost" placeholder="e.g. 1500"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeVisitModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveVisit()">Save Visit</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
